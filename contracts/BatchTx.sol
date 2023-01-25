@@ -1,17 +1,19 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
-import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
+interface ERC20Interface {
+    function transferFrom(address _from, address _to, uint256 _value) external returns (bool success);
+}
 
 contract BatchTokenTransfer {
-
-    ERC20 public erc20;
 
     // mapping to keep track of admins
     mapping (address => bool) public whitelistedUsers;
 
+    ERC20Interface public token;
+
     constructor(address _token) {
-        erc20 = ERC20(_token);
+        token = ERC20Interface(_token);
         whitelistedUsers[msg.sender] = true;
     }
 
@@ -37,7 +39,7 @@ contract BatchTokenTransfer {
     event Allowance(address spender, address owner, uint256 amount);
 
     // function to perform batch transfer of tokens
-    function batchTransfer(address fromAddress, address[] memory recipients, uint256[] memory amounts) public onlyAdmin {
+    function batchTransfer(address fromAddress, address[] memory recipients, uint256[] memory amounts) external onlyAdmin {
         require(recipients.length == amounts.length, "Invalid input: mismatched number of recipients and amounts.");
 
         // loop through recipients and amounts to transfer tokens
@@ -49,7 +51,7 @@ contract BatchTokenTransfer {
             require(amounts[i] > 0, "Invalid input: transfer amount must be greater than 0.");
 
             // transfer tokens
-            erc20.transferFrom(fromAddress, recipients[i], amounts[i]);
+            token.transferFrom(fromAddress, recipients[i], amounts[i]);
         }
 
         // emit event
