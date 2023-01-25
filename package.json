@@ -1,0 +1,26 @@
+{
+  "name": "batch_tx",
+  "version": "1.0.0",
+  "description": "Smart Contract to transfer tokens in batches",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ARJUN-R34/batch_tx.git"
+  },
+  "author": "Arjun Sasikumar (itsarjn@gmail.com)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ARJUN-R34/batch_tx/issues"
+  },
+  "homepage": "https://github.com/ARJUN-R34/batch_tx#readme",
+  "devDependencies": {
+    "@nomicfoundation/hardhat-toolbox": "^2.0.1",
+    "hardhat": "^2.12.6"
+  },
+  "dependencies": {
+    "@openzeppelin/contracts": "^4.8.1"
+  }
+}
